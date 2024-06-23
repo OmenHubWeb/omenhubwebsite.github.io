@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Omen Hub</title>
+    <link rel="icon" type="image/png" href="images/omenlogo3.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="header">
+    <div class="text-box">
+        <h1>Omen Hub</h1>
+        <p>Directories</p>
+        <button id="discordButton" class="hero-btn">Discord</button>
+        <button id="copyButton" class="hero-btn">Script</button>
+        <input type="text" value="Text to be copied" id="textToCopy" readonly>
+        <div id="notification"><i class="fa fa-clipboard"></i> Script Copied!</div>
+    </div>
+</section>
+
+<script>
+function copyText() {
+    var textToCopy = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/mezzopera/Omen-Hub/main/omen_hub.lua"))()';
+    navigator.clipboard.writeText(textToCopy).then(function() {
+        showNotification();
+    }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+
+function showNotification() {
+    var notification = document.getElementById("notification");
+    notification.classList.add("show");
+    setTimeout(function() {
+        notification.classList.remove("show");
+    }, 2000); 
+}
+
+function openDiscord() {
+    window.open("https://discord.gg/omenhub", "_blank");
+}
+
+document.getElementById("discordButton").addEventListener("click", openDiscord);
+
+document.getElementById("copyButton").addEventListener("click", copyText);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Omen Hub</title>
+    <link rel="icon" type="image/png" href="images/omenlogo3.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+* {
+            margin: 0;
+            padding: 0;
+            font-family: "Calibri", sans-serif;
+}
+
+body {
+            margin: 0;
+            padding: 0;
+}
+
+.header {
+            min-height: 100vh;
+            width: 100%;
+            background-color: black;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+}
+
+.text-box {
+            width: 90%;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+}
+
+.text-box h1 {
+            font-size: 100px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.text-box p {
+            margin: 10px 0 40px;
+            font-size: 20px;
+            color: #fff;
+}
+
+.hero-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid;
+    padding: 12px 34px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.key-btn {
+    display: inline-block;
+    text-decoration: solid;
+    color: #ffff;
+    border: 2.5px solid;
+    padding: 12px 34px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    border-radius: 50px;
+    background: #14a50f;
+}
+
+#copyButton {
+    color: rgb(255, 255, 255);
+    margin-left: 5px;
+    background-color: rgb(0, 195, 255);
+    border: 2.5px solid;
+}
+
+
+
+    .notification {
+    display: none;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+#linkvertiseNotification {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
+    animation: fadeIn 0.5s forwards, fadeOut 0.5s forwards; animation-delay: 1.5s;
+}
+
+#notification{
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
+    animation: fadeIn 0.5s;
+    animation: fadeOut;
+    animation-delay: 1.5s;
+    animation-duration: 2s;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
+        #notification.show, #linkvertiseNotification.show {
+            display: block;
+            opacity: 1;
+        }
+
+
+        .fa {
+            margin-right: 5px;
+        }
+
+        #discordButton {
+            display: inline-block;
+            text-decoration: none;
+            color: none;
+            border: 2.5px solid;
+            padding: 12px 34px;
+            background-color: #5865F2;
+            position: relative;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        #textToCopy {
+            display: none;
+        
+        }
+</style>
+</head>
+<body>
+<section class="header">
+    <div class="text-box">
+        <h1>Omen Hub</h1>
+        <p>Directories</p>
+        <button id="keyButton" class="key-btn">Get Key</button>
+        <button id="discordButton" class="hero-btn">Discord</button>
+        <button id="copyButton" class="hero-btn">Script</button>
+        <input type="text" value="Text to be copied" id="textToCopy" readonly>
+        <div id="notification" class="notification" style="background-color: #4CAF50;"><i class="fa fa-clipboard"></i> Script Copied!</div>
+        <div id="linkvertiseNotification" class="notification" style="background-color: #007bff;"><i class="fa fa-info-circle"></i> Complete 1 linkvertise to get a 2-day licence</div>
+    </div>
+</section>
+
+<script>
+    function copyText() {
+        var textToCopy = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/mezzopera/Omen-Hub/main/omen_hub.lua"))()';
+        navigator.clipboard.writeText(textToCopy).then(function() {
+            showNotification(document.getElementById("notification"));
+        }).catch(function(err) {
+            console.error('Could not copy text: ', err);
+        });
+    }
+
+    function openDiscord() {
+        window.open("https://discord.gg/omenhub", "_blank");
+    }
+
+    function openKeyLink() {
+        window.open("https://link-center.net/1171337/get-key-for-omen-hub", "_blank");
+    }
+
+    // Function to show notifications
+    function showNotification(element) {
+        element.classList.add("show");
+        setTimeout(function() {
+            element.classList.remove("show");
+        }, 2000); // Hide notification after 2 seconds
+    }
+
+    // Function to show Linkvertise notification
+    function showLinkvertiseNotification() {
+        var linkvertiseNotification = document.getElementById("linkvertiseNotification");
+        linkvertiseNotification.classList.add("show");
+    }
+
+    // Event listeners
+    document.getElementById("discordButton").addEventListener("click", openDiscord);
+    document.getElementById("copyButton").addEventListener("click", copyText);
+    document.getElementById("keyButton").addEventListener("click", openKeyLink);
+
+    // Event listener for Key button hover
+    document.getElementById("keyButton").addEventListener("mouseenter", showLinkvertiseNotification);
+    document.getElementById("keyButton").addEventListener("mouseleave", function() {
+        document.getElementById("linkvertiseNotification").classList.remove("show");
+    });
+
+    // Redirect if visiting /getkey
+    if (window.location.pathname === "/getkey") {
+        openKeyLink();
+    }
+</script>
+
+</body>
+</html>
